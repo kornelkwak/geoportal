@@ -1,15 +1,48 @@
-const map =  mymap = L.map('mapid').setView([50.061988, 19.937405], 11);
-
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+const openStreetMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     tileSize: 512,
     zoomOffset: -1,
-}).addTo(mymap);
+});
+
+//Adding layer control
+
+const sights = L.layerGroup();
+const tracks = L.layerGroup();
+
+const map = L.map('mapid', {
+    center: [50.061988, 19.937405],
+    zoom: 11,
+    layers: [openStreetMap, sights, tracks]
+});
+
+const baseLayers = {
+    "OpenStreetMap": openStreetMap
+};
+
+const overlays = {
+    "zabytki": sights,
+    "trasy": tracks
+};
+
+// Creating custom icons
+
+L.control.layers(baseLayers, overlays).addTo(map);
+
+const sightIcon = L.Icon.extend({
+    options: {
+        iconSize:     [36, 40],
+        iconAnchor:   [18, 20],
+        popupAnchor:  [0, -10]
+    }
+})
+
+const greenIcon = new sightIcon({iconUrl: 'src/img/marker_icon_dostepne.png'});
+const redIcon = new sightIcon({iconUrl: 'src/img/marker_icon_niedostepne.png'});
 
 // Adding markers from sights.json
 
-    $.getJSON( "src/json/sights.json", function(data) {
-        data.rows.forEach(function(sight){
+    $.getJSON("src/json/sights.json", data => {
+        data.rows.forEach(sight => {
             const lat = sight.latitude_0;
             const lon = sight.longitude_0;
             const title = sight.obiekt;
@@ -17,23 +50,27 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             if (info === null || info === 'brak') {
                 info = 'brak opisu';
             }
-            
+
             if (lat !== null & lon !== null & isNaN(lat) === false & isNaN(lon) === false) {
-                L.marker([lat, lon]).addTo(map)
-                 .bindPopup(`<h3>${title}</h3><br/>${info}`)
+                    
+                L.marker([lat, lon], {icon: sight.dostepnosc === 'niedostępny' ? redIcon : greenIcon}).addTo(sights)
+                 .bindPopup(`<h3>${title}</h3><br/>${info}`);
             }  
         });
       });
 
 // Adding polylines from tracks.json
 
-    $.getJSON( "src/json/tracks.json", function(data) {
+    $.getJSON("src/json/tracks.json", data => {
         
         data.posts.forEach(function(track){
             
             const coordinates_string = track.custom_fields.line_data;
             const title = track.title;
-            const info = track.excerpt;
+            let info = track.excerpt;
+            if (info === null || info === 'brak') {
+                info = 'brak opisu';
+            }
             
             if (coordinates_string !== undefined) {
                 const coordinates = coordinates_string[0].split(';');
@@ -52,8 +89,9 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     }
                 })
 
-                    L.polyline(tracks_array).addTo(map)
-                     .bindPopup(`<h3>${title}</h3><br/>${info}`)       
+                    L.polyline(tracks_array).addTo(tracks)
+                     .bindPopup(`<h3>${title}</h3><br/>${info}`);       
             }    
       });
     });
+
