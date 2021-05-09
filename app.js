@@ -1,7 +1,7 @@
 const openStreetMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     tileSize: 512,
-    zoomOffset: -1,
+    zoomOffset: -1
 });
 
 //Adding layer control
@@ -24,9 +24,14 @@ const overlays = {
     "trasy": tracks
 };
 
-// Creating custom icons
-
 L.control.layers(baseLayers, overlays).addTo(map);
+
+// Adding address searching plugin 
+
+map.addControl(L.control.search({position: 'topleft' }));
+map.setGeocoder('Nominatim');
+
+// Creating custom icons
 
 const sightIcon = L.Icon.extend({
     options: {
@@ -34,8 +39,8 @@ const sightIcon = L.Icon.extend({
         iconAnchor:   [18, 20],
         popupAnchor:  [0, -10]
     }
-})
-
+});
+ 
 const greenIcon = new sightIcon({iconUrl: 'src/img/marker_icon_dostepne.png'});
 const redIcon = new sightIcon({iconUrl: 'src/img/marker_icon_niedostepne.png'});
 
@@ -95,3 +100,4 @@ const redIcon = new sightIcon({iconUrl: 'src/img/marker_icon_niedostepne.png'});
       });
     });
 
+   
