@@ -42,8 +42,7 @@ L.control.search({
     minLength: 2,
     zoom: 20,
     container: "search-container",
-    textPlaceholder: "Wyszukaj adres..."
-    
+    textPlaceholder: "Wyszukaj adres..."   
 })
 .addTo(map);
 
@@ -116,30 +115,29 @@ const redIcon = new sightIcon({iconUrl: './src/img/marker_icon_niedostepne.png'}
       });
     });
 
+// Adding action for button to set initial view
+
 const startViewButton = document.querySelector(".startViewBtn");
 
 startViewButton.addEventListener("click", () => {
     map.setView([50.061988, 19.937405], 11);
 });
 
-var customControl =  L.Control.extend({        
-    options: {
-      position: 'topleft'
-    }, 
+// Saving current view in local storage
 
-    onAdd: function (map) {
-        var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
+const startView = [[50.061988, 19.937405], 11];
+function saveCurrentView() {
+    const zoom = map.getZoom();
+    const { lat, lng } = map.getCenter();
+    let currentView = [[lat, lng], zoom];
+    localStorage.setItem(startView, currentView);
+}
 
-        container.style.backgroundColor = 'white';     
-        container.style.backgroundImage = "url(http://t1.gstatic.com/images?q=tbn:ANd9GcR6FCUMW5bPn8C4PbKak2BJQQsmC-K9-mbYBeFZm1ZM2w2GRy40Ew)";
-        container.style.backgroundSize = "30px 30px";
-        container.style.width = '30px';
-        container.style.height = '30px';
-
-        container.onclick = function(){
-          console.log('buttonClicked');
-        }
-
-        return container;
-      }
-    });
+  map.on('dragend', saveCurrentView);
+  
+  document.addEventListener('DOMContentLoaded', function () {
+    const newStartCoordinatesArray = localStorage.getItem(startView).split(',');
+    map.center = [parseFloat(newStartCoordinatesArray[0]), parseFloat(newStartCoordinatesArray[1])];
+    map.zoom = parseInt(newStartCoordinatesArray[2]);
+    map.setView(map.center, map.zoom);
+});

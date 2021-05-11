@@ -31,6 +31,7 @@ const btnArrowRight = document.querySelector(".fa-arrow-right");
 sideControlTrigger.addEventListener('click', () => {
         
     sideControl.classList.toggle("active");
+    
     if (sideControl.classList.contains("active")) {
         btnArrowRight.style.display = "none";
         btnArrowLeft.style.display = "block";
@@ -41,5 +42,4 @@ sideControlTrigger.addEventListener('click', () => {
     }
 });
 
-// Added 
-leafletTopLeft.appendChild(startViewButton);
+
