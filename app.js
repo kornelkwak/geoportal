@@ -116,3 +116,30 @@ const redIcon = new sightIcon({iconUrl: './src/img/marker_icon_niedostepne.png'}
       });
     });
 
+const startViewButton = document.querySelector(".startViewBtn");
+
+startViewButton.addEventListener("click", () => {
+    map.setView([50.061988, 19.937405], 11);
+});
+
+var customControl =  L.Control.extend({        
+    options: {
+      position: 'topleft'
+    }, 
+
+    onAdd: function (map) {
+        var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
+
+        container.style.backgroundColor = 'white';     
+        container.style.backgroundImage = "url(http://t1.gstatic.com/images?q=tbn:ANd9GcR6FCUMW5bPn8C4PbKak2BJQQsmC-K9-mbYBeFZm1ZM2w2GRy40Ew)";
+        container.style.backgroundSize = "30px 30px";
+        container.style.width = '30px';
+        container.style.height = '30px';
+
+        container.onclick = function(){
+          console.log('buttonClicked');
+        }
+
+        return container;
+      }
+    });

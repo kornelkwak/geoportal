@@ -8,6 +8,7 @@ const tileSelector = document.querySelectorAll(".leaflet-control-layers-base");
 const sideControlTrigger = document.querySelector(".side-control-trigger");
 const sideControl = document.querySelector(".side-control-panel");
 
+
 // Creating custom controls outside the map
 
 const createCustomControl = (oldParent,newParent) => {
@@ -40,3 +41,5 @@ sideControlTrigger.addEventListener('click', () => {
     }
 });
 
+// Added 
+leafletTopLeft.appendChild(startViewButton);
