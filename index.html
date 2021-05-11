@@ -5,14 +5,36 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Geoportal</title>
-    <link rel="stylesheet" href="/lib/leaflet/leaflet.css" />
-    <script src = "/lib/jquery/jquery-3.6.0.min.js"></script>
-    <script src = "/lib/leaflet/leaflet.js"></script>
-    <script src="//unpkg.com/@sjaakp/leaflet-search/dist/leaflet-search.js"></script>
-    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./lib/leaflet/leaflet.css" />
+    <script src = "./lib/jquery/jquery-3.6.0.min.js"></script>
+    <script src = "./lib/leaflet/leaflet.js"></script>
+    <link rel="stylesheet" href="./lib/leaflet-search-master/dist/leaflet-search.src.css" />
+    <script src="./lib/leaflet-search-master/dist/leaflet-search.src.js"></script>
+    <link rel="stylesheet" href="./css/styles.css" />
 </head>
 <body>
-    <div id="mapid"></div>    
-    <script src = "app.js"></script>
+    <header>
+        <img src="./src/img/logo.png" class ="logo" alt="logo GISON">
+        <div class="search-container" id="search-container"></div>
+    </header>
+    <div class="side-control-panel">
+        <div class="base-layer-control-container">
+            <h2>Warstwy podkładowe</h2>
+            <div class="base-layer-control"></div>
+        </div>
+        <div class="layer-control-container">
+            <h2>Warstwy</h2>
+        <div class="layer-control"></div>
+        </div>
+        <button class="side-control-trigger"><i class="fas fa-arrow-right"></i><i class="fas fa-arrow-left"></i></button>
+    </div>
+    <section>
+        <div id="map"></div>    
+    </section>
+    <script src = "./app.js"></script>
+    <script src = "./layout.js"></script>
 </body>
 </html>
