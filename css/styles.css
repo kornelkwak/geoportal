@@ -85,6 +85,12 @@ header .search-container .leaflet-control-search {
 }
 
 header .search-container .search-button {
+  border: none;
+  background-color: #2e6da4;
+  color: white;
+  cursor: pointer;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
   display: block;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -97,12 +103,6 @@ header .search-container .search-button {
   background: url("/src/img/search-solid-white.svg") 1px 1px #fff;
   fill: white;
   display: block;
-  border: none;
-  background-color: #2e6da4;
-  color: white;
-  cursor: pointer;
-  -webkit-transition: all 0.2s ease;
-  transition: all 0.2s ease;
   -webkit-transition: none;
   transition: none;
 }

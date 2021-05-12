@@ -95,7 +95,7 @@ const redIcon = new sightIcon({iconUrl: './src/img/marker_icon_niedostepne.png'}
             
             if (coordinates_string !== undefined) {
                 const coordinates = coordinates_string[0].split(';');
-                const coordinates_array =  coordinates.map(function(latlon) {
+                const coordinates_array =  coordinates.map(latlon => {
                     if (latlon !== undefined || latlon !== 0) {
                         return latlon.split(',');
                     }   
@@ -126,7 +126,7 @@ startViewButton.addEventListener("click", () => {
 // Saving current view in local storage
 
 const startView = [[50.061988, 19.937405], 11];
-function saveCurrentView() {
+const saveCurrentView = () => {
     const zoom = map.getZoom();
     const { lat, lng } = map.getCenter();
     let currentView = [[lat, lng], zoom];
@@ -135,7 +135,7 @@ function saveCurrentView() {
 
   map.on('dragend', saveCurrentView);
   
-  document.addEventListener('DOMContentLoaded', function () {
+  document.addEventListener('DOMContentLoaded', () => {
     const newStartCoordinatesArray = localStorage.getItem(startView).split(',');
     map.center = [parseFloat(newStartCoordinatesArray[0]), parseFloat(newStartCoordinatesArray[1])];
     map.zoom = parseInt(newStartCoordinatesArray[2]);

@@ -71,6 +71,7 @@ header {
         }
         
         .search-button {
+            @include button;
             display: block;
             box-sizing: border-box;
             height: 40px;
@@ -82,7 +83,6 @@ header {
             background: url("/src/img/search-solid-white.svg")  1px 1px #fff;
             fill: white;
             display: block;
-            @include button;
             transition: none;
 
             &:hover { 
