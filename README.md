@@ -7,7 +7,7 @@ Live version: https://kornelkwak.github.io/geoportal/
 ## API and plugins used
 
 * Nominatim API - https://nominatim.openstreetmap.org/ui/search.html - API for searching addresses in OpenStreetMap
-* Leaflet.seach Plugin - https://github.com/stefanocudini/leaflet-search 
+* Leaflet.search Plugin - https://github.com/stefanocudini/leaflet-search 
 
 ## Technologies used 
 
