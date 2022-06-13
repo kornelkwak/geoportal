@@ -5,7 +5,7 @@ body {
 
 html, body, #map {
   height: 100%;
-   width: 100vw;
+  width: 100vw;
   font-family: 'Open Sans', sans-serif;
 }
 
@@ -39,7 +39,7 @@ header {
 }
 
 header .logo {
-  height: 8vh;
+  width: 350px;
   margin-left: 15px;
 }
 
